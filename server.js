@@ -5,6 +5,13 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
 
+// Middleware para permitir CORS
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*'); // ou ajuste para o domínio específico do seu aplicativo
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
 app.get('/proxy', async (req, res) => {
   try {
     const { resource } = req.query;
